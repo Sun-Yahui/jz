@@ -6,6 +6,8 @@ import com.briup.jz.service.IAddressService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -35,6 +37,9 @@ public class AddressController {
 
     @GetMapping("pageQuery")
     @ApiOperation("分页查询地址相关信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="userId",value = "用户id",required=true,dataType="long",paramType="query")
+    })
     public Message pageQuery(String name){
         List<Address> list = addressService.pageQuery(name);
         return MessageUtil.success(list);
@@ -42,6 +47,9 @@ public class AddressController {
 
     @GetMapping("deleteById")
     @ApiOperation("通过id删除")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",value = "用户编号",required=true,dataType="long",paramType="query")
+    })
     public Message deleteById(@NotNull Long id){
         addressService.deleteById(id);
         return MessageUtil.success("删除成功");

@@ -36,13 +36,16 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
     }
 
     @Override
-    public List<ProductCategory> pageQuery(){
+    public List<ProductCategory> pageQuery(String name){
        ProductCategoryExample example = new ProductCategoryExample();
-//        if(page!=null){
-//            example.createCriteria().andNameLike("%"+page+"%");
+//        if(id!=null){
+//            example.createCriteria().andIdEqualTo(id);
 //        }
-        List<ProductCategory> list = productCategoryMapper.selectByExample(example);
-        return list;
+        if(name!=null){
+            example.createCriteria().andNameLike("%"+name+"%");
+        }
+        //返回查询结果
+        return productCategoryMapper.selectByExample(example);
     }
 
     @Override
