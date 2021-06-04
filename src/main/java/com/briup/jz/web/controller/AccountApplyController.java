@@ -1,5 +1,6 @@
 package com.briup.jz.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -89,9 +90,12 @@ public class AccountApplyController {
 	@ApiOperation(value = "提交账户变动申请")
 	@PostMapping("submitAccountApply")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "主键", paramType = "query",dataType="int"), 
-    @ApiImplicitParam(name = "status", value = "该框不许填写，默认为未审核", paramType = "query"),})
+    @ApiImplicitParam(name = "status", value = "该框不许填写，默认为未审核", paramType = "query"),
+    @ApiImplicitParam(name = "applyType", value = "提现，充值", paramType = "query"),
+    @ApiImplicitParam(name = "applyTime", value = "该框不许填写，默认为当前时间", paramType = "query"),})
 	public Message submitAccountApply(AccountApply accountApply) {
 		accountApply.setStatus("未审核");
+		accountApply.setApplyTime(new Date().getTime());
 		accountApplyService.saveOrUpdate(accountApply);
 		return MessageUtil.success("提交账户变动申请成功");
 	}}
