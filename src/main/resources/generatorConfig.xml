@@ -5,13 +5,13 @@
 <!-- mybatis-generator的核心配置文件 -->
 <generatorConfiguration>
 	<classPathEntry
-		location="/Users/lichunyu/springboot/repository/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar" />
+		location="D:\briup\repository\mysql\mysql-connector-java\5.1.37\mysql-connector-java-5.1.37.jar" />
 	<!-- 123.56.94.156 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://127.0.0.1:3306/briup-ej" userId="briup"
-			password="briupSH">
+			connectionURL="jdbc:mysql://127.0.0.1:3306/briup-ej" userId="root"
+			password="root">
 			<!--产生selectByPrimaryKey -->
 			<property name="useInformationSchema" value="true" />
 		</jdbcConnection>
@@ -43,6 +43,7 @@
 
 
 		<!-- 映射配置 -->
+		<!--
 		<table tableName="base_log" domainObjectName="BaseLog"></table>
 		<table tableName="base_user" domainObjectName="BaseUser"></table>
 		<table tableName="base_role" domainObjectName="BaseRole"></table>
@@ -73,8 +74,9 @@
 		<table tableName="jz_account_customer" domainObjectName="AccountCustomer"></table>
 		<table tableName="jz_account_employee" domainObjectName="AccountEmployee"></table>
 		<table tableName="jz_account_system" domainObjectName="AccountSystem"></table>
-		<table tableName="jz_account_apply" domainObjectName="AccountApply"></table>
-		 
+		<table tableName="jz_account_apply" domainObjectName="AccountApply"></table>-->
+		 <table domainObjectName="Carousel" tableName="cms_carousel"/>
+<table domainObjectName="CertificationApply" tableName="jz_certification_apply"/>
 		
 		<!-- mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -->
 	</context>
