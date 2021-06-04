@@ -8,7 +8,7 @@ public interface IProductCategoryService {
 
     void saveOrUpdate(ProductCategory productCategory) throws CustomerException;
 
-    List<ProductCategory> pageQuery();
+    List<ProductCategory> pageQuery(String name);
 
     void deleteById(long id) throws CustomerException;
 

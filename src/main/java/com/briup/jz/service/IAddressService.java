@@ -10,7 +10,7 @@ public interface IAddressService {
 
     void saveOrUpdate(Address address) throws CustomerException;
 
-    List<Address> pageQuery(String name);
+    List<Address> pageQuery(String id);
 
     void deleteById(long id) throws CustomerException;
 }

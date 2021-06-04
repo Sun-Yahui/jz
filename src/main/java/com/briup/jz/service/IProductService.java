@@ -9,7 +9,7 @@ public interface IProductService {
 
     void saveOrUpdate(Product product) throws CustomerException;
 
-    List<Product> pageQuery(String name);
+    List<Product> pageQuery(String name,String status,Long productCategoryId);
 
     void deleteById(long id) throws CustomerException;
 }

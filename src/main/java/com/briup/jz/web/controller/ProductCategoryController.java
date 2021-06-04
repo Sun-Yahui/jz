@@ -29,6 +29,13 @@ public class ProductCategoryController {
 
     @PostMapping("saveOrUpdate")
     @ApiOperation(value = "保存或更新产品分类信息",notes="如果ID不为空，为修改操作，根据ID进行修改；如果ID为空，为保存操作")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",value = "产品类别id",required=true,dataType="long",paramType="query"),
+            @ApiImplicitParam(name="name",value = "产品类别",required=true,dataType="string",paramType="query"),
+            @ApiImplicitParam(name="icon",value = "产品类别图片",required=true,dataType="string",paramType="query"),
+            @ApiImplicitParam(name="num",value = "产品数量",required=true,dataType="string",paramType="query"),
+            @ApiImplicitParam(name="parentId",dataType="string",paramType="query")
+    })
     public Message saveOrUpdate(ProductCategory productCategory){
         productCategoryService.saveOrUpdate(productCategory);
         return MessageUtil.success("更新成功");
@@ -36,18 +43,19 @@ public class ProductCategoryController {
 
     @GetMapping("pageQuery")
     @ApiOperation(value = "分页查询产品分类相关信息")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name="id",value = "产品id",required=true,dataType="string",paramType="query"),
-//    })
-    public Message pageQuery(){
-        List<ProductCategory> list = productCategoryService.pageQuery();
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",value = "产品类别id",dataType="long",paramType="query"),
+            @ApiImplicitParam(name="name",value = "产品类别名称",dataType="string",paramType="query")
+    })
+    public Message pageQuery(Long id,String name){
+        List<ProductCategory> list = productCategoryService.pageQuery(name);
         return MessageUtil.success(list);
     }
 
     @GetMapping("deleteById")
     @ApiOperation(value = "通过id删除产品分类")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="id",value = "产品id",dataType="long",paramType = "query", required=true),
+            @ApiImplicitParam(name="id",value = "产品类别id",dataType="long",paramType = "query", required=true),
     })
     public Message deleteById(@NotNull Long id){
         productCategoryService.deleteById(id);

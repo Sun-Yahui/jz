@@ -31,10 +31,16 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public List<Product> pageQuery(String name){
+    public List<Product> pageQuery(String name,String status,Long productCategoryId){
         ProductExample example = new ProductExample();
         if(name!=null){
             example.createCriteria().andNameLike("%"+name+"%");
+        }
+        if(status!=null){
+            example.createCriteria().andStatusEqualTo(status);
+        }
+        if(productCategoryId!=null){
+            example.createCriteria().andProductCategoryIdEqualTo(productCategoryId);
         }
         List<Product> list = productMapper.selectByExample(example);
         return list;
