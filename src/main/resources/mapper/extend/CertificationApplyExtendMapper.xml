@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.jz.dao.extend.CertificationApplyExtendMapper">
+  <select id="select" resultMap="CertificationApplyExtendResultMap">
+  select * 
+
+  	from jz_certification_apply
+
+  	<where>
+
+  		<if test="realName != null">
+
+  			and realName like concat("%",#{realName},"%")
+
+  		</if>
+
+  		<if test="status != null">
+
+  			and status = #{status}
+
+  		</if>
+
+  	</where>
+
+  
+  </select>
+  <resultMap type="com.briup.jz.bean.extent.CertificationApplyExtend" 
+  extends = "com.briup.jz.dao.CertificationApplyMapper.BaseResultMap"
+  id="CertificationApplyExtendResultMap">
+  <association 
+
+  		property="baseUser" 
+
+  		column="user_id" 
+
+  		select="com.briup.jz.dao.BaseUserMapper.selectByPrimaryKey">
+
+  		</association>
+
+  
+  
+  </resultMap>
+</mapper>

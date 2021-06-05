@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.CertificationApply;
+import com.briup.jz.bean.extent.CertificationApplyExtend;
 import com.briup.jz.service.ICertificationApplyService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -33,6 +34,17 @@ public class CertificationApplyController {
     @GetMapping("query")
     public Message query(String name){
         List<CertificationApply> list = iCertificationApplyService.query(name);
+        return MessageUtil.success(list);
+    }
+    
+    @ApiOperation(value = "查询所有实名认证信息")
+    @GetMapping("queryCascade")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name="realName",value = "名字",paramType = "query"),
+        @ApiImplicitParam(name="status",value = "状态",paramType = "query"),
+    })
+    public Message queryCascade(String realName, String status){
+        List<CertificationApplyExtend> list = iCertificationApplyService.queryCascade(realName,status);
         return MessageUtil.success(list);
     }
 

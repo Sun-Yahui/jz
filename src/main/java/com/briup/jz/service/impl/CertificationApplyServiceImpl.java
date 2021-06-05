@@ -11,7 +11,9 @@ import com.briup.jz.bean.Category;
 import com.briup.jz.bean.CategoryExample;
 import com.briup.jz.bean.CertificationApply;
 import com.briup.jz.bean.CertificationApplyExample;
+import com.briup.jz.bean.extent.CertificationApplyExtend;
 import com.briup.jz.dao.CertificationApplyMapper;
+import com.briup.jz.dao.extend.CertificationApplyExtendMapper;
 import com.briup.jz.service.ICertificationApplyService;
 import com.briup.jz.utils.CustomerException;
 @Service
@@ -19,6 +21,9 @@ public class CertificationApplyServiceImpl implements ICertificationApplyService
 	
 	@Autowired
 	private CertificationApplyMapper certificationApplyMapper;
+	
+	@Autowired
+	private CertificationApplyExtendMapper certificationApplyExtendMapper;
 
 	@Override
 	public void saveOrUpdate(CertificationApply certificationApply) throws CustomerException {
@@ -53,6 +58,12 @@ public class CertificationApplyServiceImpl implements ICertificationApplyService
 		}
 		certificationApplyMapper.deleteByPrimaryKey(id);
 		
+	}
+
+	@Override
+	public List<CertificationApplyExtend> queryCascade(String realName, String status) {
+		// TODO Auto-generated method stub
+		return certificationApplyExtendMapper.select(realName, status);
 	}
 
 }
