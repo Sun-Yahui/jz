@@ -9,13 +9,17 @@ import com.briup.jz.bean.AccountApplyExample;
 import com.briup.jz.bean.AccountCustomer;
 import com.briup.jz.bean.AccountCustomerExample;
 import com.briup.jz.bean.AccountCustomerExample.Criteria;
+import com.briup.jz.bean.extend.AccountCustomerExtend;
 import com.briup.jz.dao.AccountCustomerMapper;
+import com.briup.jz.dao.extend.AccountCustomerExtendMapper;
 import com.briup.jz.service.IAccountCustomerService;
 @Service
 public class AccountCustomerServiceImpl implements IAccountCustomerService{
 	@Autowired
     private AccountCustomerMapper accountCustomerMapper;
 	private AccountCustomerExample accountCustomerExample;
+	@Autowired
+	private AccountCustomerExtendMapper accountCustomerExtendMapper;
 	@Override
 	public void saveOrUpdate(AccountCustomer accountCustomer) {
 		// TODO Auto-generated method stub
@@ -55,6 +59,12 @@ public class AccountCustomerServiceImpl implements IAccountCustomerService{
 		List<AccountCustomer> list = accountCustomerMapper.selectByExample(exmple);
 		
 		return list ;
+	}
+	@Override
+	public List<AccountCustomerExtend> select(Long page, Long pageSize, String type, String status, Long userId,
+			Long transferTime, Long endTime, Long id) {
+		// TODO Auto-generated method stub
+		return accountCustomerExtendMapper.select(page, pageSize, type, status, userId, transferTime, endTime, id);
 	}
 	
 }

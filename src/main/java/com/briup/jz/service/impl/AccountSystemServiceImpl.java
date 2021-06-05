@@ -9,7 +9,9 @@ import com.briup.jz.bean.AccountEmployeeExample;
 import com.briup.jz.bean.AccountSystem;
 import com.briup.jz.bean.AccountSystemExample;
 import com.briup.jz.bean.AccountSystemExample.Criteria;
+
 import com.briup.jz.dao.AccountSystemMapper;
+
 import com.briup.jz.service.IAccountSystemService;
 
 @Service
@@ -17,7 +19,8 @@ public class AccountSystemServiceImpl implements IAccountSystemService {
 	@Autowired
 	private AccountSystemMapper accountSystemMapper;
 	private AccountSystemExample accountSystemExample;
-
+//     @Autowired
+//	private AccountSystemExtendMapper accountSystemExtendMapper;
 	@Override
 	public void saveOrUpdate(AccountSystem accountSystem) {
 		// TODO Auto-generated method stub
@@ -52,5 +55,12 @@ public class AccountSystemServiceImpl implements IAccountSystemService {
 		
 		return accountSystemMapper.selectByExample(exmple);
 	}
+//
+//	@Override
+//	public List<AccountSystemExtend> select(Long page, Long pageSize, String type, String status, Long transferTime,
+//			Long endTime) {
+//		// TODO Auto-generated method stub
+//		return accountSystemExtendMapper.select(page, pageSize, type, status, transferTime, endTime);
+//	}
 
 }

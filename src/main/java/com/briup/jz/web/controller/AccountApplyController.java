@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.AccountApply;
 import com.briup.jz.bean.Category;
+import com.briup.jz.bean.extend.AccountApplyExtend;
 import com.briup.jz.service.IAccountApplyService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -37,12 +38,31 @@ public class AccountApplyController {
 	@ApiImplicitParam(name = "id", value = "主键", paramType = "query",dataType="int"), 
 	@ApiImplicitParam(name = "status", value = "通过，不通过，未审核", paramType = "query",dataType="String"),
 	@ApiImplicitParam(name = "applyType", value = "充值，提现", paramType = "query",dataType="String"),})
-	public Message pageQuery(Long page,Long pageSize,String applyType, String status, Long userId,Long beginTime,Long endTime,Long id) {
+	public Message pageQuery(Long page,Long pageSize,String applyType, String status, Long userId,Long applyTime,Long endTime,Long id) {
 		
-		List<AccountApply> list = accountApplyService.pageQuery(page,pageSize,applyType,status,userId, beginTime,endTime,id);
+		List<AccountApply> list = accountApplyService.pageQuery(page,pageSize,applyType,status,userId, applyTime,endTime,id);
 		return MessageUtil.success(list);
 	}
- 
+	
+	
+	
+	
+	@ApiOperation(value = "级联分页查询账户变动信息")
+	@GetMapping("pageQueryCascade")
+	@ApiImplicitParams({ 
+	@ApiImplicitParam(name = "id", value = "主键", paramType = "query",dataType="int"), 
+	@ApiImplicitParam(name = "status", value = "通过，不通过，未审核", paramType = "query",dataType="String"),
+	@ApiImplicitParam(name = "applyType", value = "充值，提现", paramType = "query",dataType="String"),})
+	public Message pageQueryCascade(Long page,Long pageSize,String applyType, String status, Long userId,Long applyTime,Long endTime,Long id) {
+		
+		List<AccountApplyExtend> list = accountApplyService.select(page, pageSize, applyType, status, userId, applyTime, endTime, id);
+		return MessageUtil.success(list);
+	}
+	
+	
+	
+	
+	
 	@ApiOperation(value = "撤销账户变动申请")
 	@GetMapping("revokeAccountApply")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "主键", paramType = "query",dataType="int"), })
