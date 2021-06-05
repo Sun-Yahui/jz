@@ -31,10 +31,15 @@ public class BaseLogController {
 	@Autowired
 	public IBaseLogService baseLogService;
 	
-	@ApiOperation(value = "查询所有日志分类")
+	@ApiOperation("多条件符合查询")
+	
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="realname",value = "真实名字",paramType = "query"),
+		@ApiImplicitParam(name="method",value = "方法",paramType = "query"),
+	})
     @GetMapping("query")
-    public Message query(String realname){
-        List<BaseLog> list = baseLogService.query(realname);
+    public Message query(String realname,String method){
+        List<BaseLog> list = baseLogService.query(realname,method);
         return MessageUtil.success(list);
     }
 
@@ -48,7 +53,7 @@ public class BaseLogController {
         return MessageUtil.success("删除成功");
     }
 
-    @ApiOperation(value = "保存或更新日志分类信息")
+    @ApiOperation(value="保存或更新日志分类信息",notes="如果id为空是保存否则是更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="Long"),
             @ApiImplicitParam(name="realname",value = "真实名字",paramType = "form",required = true,dataType="String"),

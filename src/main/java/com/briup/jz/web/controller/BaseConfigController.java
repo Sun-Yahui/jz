@@ -31,10 +31,14 @@ public class BaseConfigController {
 	public IBaseConfigService baseConfigService;
 	
 	
-	 @ApiOperation(value = "查询所有配置信息")
+	    @ApiOperation("多条件符合查询")
+	    @ApiImplicitParams({
+	    	@ApiImplicitParam(name="name",value = "栏目名称",paramType = "query"),
+	    	@ApiImplicitParam(name="val",value = "栏目描述",paramType = "query"),
+	    })
 	    @GetMapping("query")
-	    public Message query(String name){
-	        List<BaseConfig> list = baseConfigService.query(name);
+	    public Message query(String name,String val){
+	        List<BaseConfig> list = baseConfigService.query(name,val);
 	        return MessageUtil.success(list);
 	    }
 
@@ -48,7 +52,7 @@ public class BaseConfigController {
 	        return MessageUtil.success("删除成功");
 	    }
 
-	    @ApiOperation(value = "保存或更新配置信息")
+	    @ApiOperation(value="保存或更新配置信息",notes="如果id为空是保存否则是更新")
 	    @ApiImplicitParams({
 	            @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="int"),
 	            @ApiImplicitParam(name="name",value = "栏目名称",paramType = "form",required = true,dataType="String"),

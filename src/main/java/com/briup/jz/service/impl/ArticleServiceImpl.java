@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.briup.jz.bean.Article;
 import com.briup.jz.bean.ArticleExample;
-
-
+import com.briup.jz.bean.ArticleExample.Criteria;
 import com.briup.jz.dao.ArticleMapper;
 import com.briup.jz.service.IArticleService;
 import com.briup.jz.utils.CustomerException;
@@ -40,13 +39,21 @@ public class ArticleServiceImpl implements IArticleService{
 	}
 
 	@Override
-	public List<Article> query(String title) {
+	public List<Article> query(String title, String status, Long categoryId) {
 		ArticleExample example = new ArticleExample();
-		if(title!=null){
-			example.createCriteria().andTitleLike("%"+title+"%");
+		Criteria criteria = example.createCriteria();
+		// 多条件符合查询
+		if(title != null) {
+			criteria.andTitleLike("%"+title+"%");
 		}
-		List<Article> list = articleMapper.selectByExample(example);
-		return list;
+		if(status != null) {
+			criteria.andStatusEqualTo(status);
+		}
+		if(categoryId != null) {
+			criteria.andCategoryIdEqualTo(categoryId);
+		}
+		// 返回查询结果
+		return articleMapper.selectByExample(example);
 	}
 
 	@Override

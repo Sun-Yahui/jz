@@ -9,7 +9,7 @@ public interface IBaseFileService {
 	
     void saveOrUpdate(BaseFile baseFile) throws CustomerException;
 	
-	List<BaseFile> query(String fileName);
+	List<BaseFile> query(String fileName,String groupName);
 	
 	void deleteById(String id) throws CustomerException;
 }

@@ -47,7 +47,7 @@ public class CategoryController {
         return MessageUtil.success("删除成功");
     }
 
-    @ApiOperation(value = "保存或更新资讯分类信息")
+    @ApiOperation(value="保存或更新资讯分类信息",notes="如果id为空是保存否则是更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name="id",value = "主键",paramType = "form"),
             @ApiImplicitParam(name="name",value = "栏目名称",paramType = "form",required = true),

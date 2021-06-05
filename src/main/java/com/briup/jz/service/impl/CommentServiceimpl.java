@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.briup.jz.bean.Comment;
 import com.briup.jz.bean.CommentExample;
-
+import com.briup.jz.bean.CommentExample.Criteria;
 import com.briup.jz.dao.CommentMapper;
 import com.briup.jz.service.ICommentService;
 import com.briup.jz.utils.CustomerException;
@@ -40,13 +40,16 @@ public class CommentServiceimpl implements ICommentService{
 	}
 
 	@Override
-	public List<Comment> query(String comment) {
+	public List<Comment> query(String comment,String status) {
 		CommentExample example = new CommentExample();
-		if(comment!=null){
-			example.createCriteria().andCommentLike("%"+comment+"%");
+		Criteria criteria = example.createCriteria();
+		if(comment!=null) {
+			criteria.andCommentLike("%"+comment+"%");
 		}
-		List<Comment> list = commentMapper.selectByExample(example);
-		return list;
+		if(status!=null) {
+			criteria.andStatusEqualTo(status);
+		}
+		return commentMapper.selectByExample(example);
 	}
 
 	@Override

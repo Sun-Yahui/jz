@@ -9,7 +9,7 @@ public interface IArticleService {
 	
 	void saveOrUpdate(Article article) throws CustomerException;
 	
-	List<Article> query(String title);
+	List<Article> query(String title,String status, Long categoryId);
 	
 	void deleteById(long id) throws CustomerException;
 }

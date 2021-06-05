@@ -10,7 +10,7 @@ public interface IBaseLogService {
 	
     void saveOrUpdate(BaseLog baseLog) throws CustomerException;
 	
-	List<BaseLog> query(String realname);
+	List<BaseLog> query(String realname,String method);
 	
 	void deleteById(long id) throws CustomerException;
 }

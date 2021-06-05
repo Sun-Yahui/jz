@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.briup.jz.bean.Carousel;
 import com.briup.jz.bean.CarouselExample;
+import com.briup.jz.bean.CarouselExample.Criteria;
 import com.briup.jz.dao.CarouselMapper;
 import com.briup.jz.service.ICarouselService;
 import com.briup.jz.utils.CustomerException;
@@ -32,15 +33,19 @@ public class CarouselServiceImpl implements ICarouselService{
 	}
 
 	@Override
-	public List<Carousel> query(String name) {
+	public List<Carousel> query(String name,String introduce) {
 		CarouselExample example = new CarouselExample();
-		if(name!=null){
-			example.createCriteria().andNameLike("%"+name+"%");
+		Criteria criteria = example.createCriteria();
+		if(name!=null) {
+			criteria.andNameLike("%"+name+"%");
 		}
-		List<Carousel> list = carouselMapper.selectByExample(example);
-		return list;
+		if(introduce!=null) {
+			criteria.andIntroduceEqualTo(introduce);
+		}
+		return carouselMapper.selectByExample(example);
 	}
 
+	
 	@Override
 	public void deleteById(long id) throws CustomerException {
 		Carousel carousel = carouselMapper.selectByPrimaryKey(id);

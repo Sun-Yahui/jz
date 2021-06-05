@@ -30,13 +30,17 @@ public class ArticleController {
 	@Autowired
 	public IArticleService articleService;
 	
-	
-	@ApiOperation(value = "获取学生风采信息")
+	@ApiOperation("多条件符合查询")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="title",value="文章标题",paramType="query"),
+		@ApiImplicitParam(name="status",value="状态[未审核、通过、不通过、推荐]",paramType="query"),
+		@ApiImplicitParam(name="categoryId",value="资讯分类id",paramType="query")
+	})
 	@GetMapping("query")
-	public Message query(String title){
-	        List<Article> list = articleService.query(title);
-	        return MessageUtil.success(list);
-	    }
+    public Message query(String title,String status,Long categoryId){
+		List<Article> list = articleService.query(title, status, categoryId);
+        return MessageUtil.success(list);
+    }
 	
 	@ApiOperation(value = "通过id删除")
     @GetMapping("deleteById")
@@ -49,7 +53,7 @@ public class ArticleController {
         return MessageUtil.success("删除成功");
     }
 	
-	@ApiOperation("保存或更新")
+	@ApiOperation(value="保存或更新",notes="如果id为空是保存否则是更新")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="id",value="编号[更新的时候需要填写]",paramType="form"),
 		@ApiImplicitParam(name="title",value="文章标题", required=true, paramType="form"),

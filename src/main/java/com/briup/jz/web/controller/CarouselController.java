@@ -31,10 +31,15 @@ public class CarouselController {
 	@Autowired
 	public ICarouselService carouselService;
 	
-	@ApiOperation(value = "查询所有轮播图")
+	@ApiOperation("多条件符合查询")
+	
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="name",value = "轮播图名称",paramType = "query"),
+		@ApiImplicitParam(name="introduce",value = "轮播图介绍",paramType = "query"),
+	})
     @GetMapping("query")
-    public Message query(String name){
-        List<Carousel> list = carouselService.query(name);
+    public Message query(String name,String introduce){
+        List<Carousel> list = carouselService.query(name,introduce);
         return MessageUtil.success(list);
     }
 
@@ -48,7 +53,7 @@ public class CarouselController {
         return MessageUtil.success("删除成功");
     }
 
-    @ApiOperation(value = "保存或更新轮播图")
+    @ApiOperation(value="保存或更新轮播图",notes="如果id为空是保存否则是更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="Long"),
             @ApiImplicitParam(name="name",value = "轮播图名称",paramType = "form",required = true,dataType="String"),

@@ -9,7 +9,7 @@ public interface IBaseConfigService {
 	
     void saveOrUpdate(BaseConfig baseConfig) throws CustomerException;
 	
-	List<BaseConfig> query(String name);
+	List<BaseConfig> query(String name,String val);
 	
 	void deleteById(long id) throws CustomerException;
 }

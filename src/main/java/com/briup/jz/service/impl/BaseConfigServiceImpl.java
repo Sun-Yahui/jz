@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.briup.jz.bean.BaseConfig;
 import com.briup.jz.bean.BaseConfigExample;
-
+import com.briup.jz.bean.BaseConfigExample.Criteria;
 import com.briup.jz.dao.BaseConfigMapper;
 import com.briup.jz.service.IBaseConfigService;
 import com.briup.jz.utils.CustomerException;
@@ -36,13 +36,18 @@ public class BaseConfigServiceImpl implements IBaseConfigService{
 	}
 
 	@Override
-	public List<BaseConfig> query(String name) {
+	public List<BaseConfig> query(String name,String val) {
 		BaseConfigExample example = new BaseConfigExample();
-		if(name!=null){
-			example.createCriteria().andNameLike("%"+name+"%");
+		Criteria criteria = example.createCriteria();
+		// 多条件符合查询
+		if(name != null) {
+			criteria.andNameLike("%"+name+"%");
 		}
-		List<BaseConfig> list = baseConfigMapper.selectByExample(example);
-		return list;
+		if(val != null) {
+			criteria.andValEqualTo(val);
+		}
+		// 返回查询结果
+		return baseConfigMapper.selectByExample(example);
 	}
 
 	@Override

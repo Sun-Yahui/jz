@@ -31,10 +31,15 @@ public class CommentController {
 	@Autowired
 	public ICommentService commentService;
 	
-	 @ApiOperation(value = "查询所有资讯评论")
+	 @ApiOperation("多条件符合查询")
+	 
+	 @ApiImplicitParams({
+		 @ApiImplicitParam(name="comment",value = "评论信息",paramType = "query"),
+		 @ApiImplicitParam(name="status",value = "状态",paramType = "query"),
+	 })
 	 @GetMapping("query")
-	 public Message query(String comment){
-	      List<Comment> list = commentService.query(comment);
+	 public Message query(String comment,String status){
+	      List<Comment> list = commentService.query(comment,status);
 	      return MessageUtil.success(list);
 	    }
 	
@@ -49,7 +54,7 @@ public class CommentController {
 	    }
 	
 	
-	 @ApiOperation(value = "保存或更新资讯评论信息")
+	 @ApiOperation(value="保存或更新咨询或评论信息",notes="如果id为空是保存否则是更新")
 	    @ApiImplicitParams({
 	            @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="Long"),
 	            @ApiImplicitParam(name="comment",value = "评论信息",paramType = "form",required = true,dataType="String"),        

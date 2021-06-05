@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.briup.jz.bean.BaseFile;
 import com.briup.jz.bean.BaseFileExample;
-
+import com.briup.jz.bean.BaseFileExample.Criteria;
 import com.briup.jz.dao.BaseFileMapper;
 import com.briup.jz.service.IBaseFileService;
 import com.briup.jz.utils.CustomerException;
@@ -36,13 +37,18 @@ public class BaseFileServiceImpl implements IBaseFileService{
 	}
 
 	@Override
-	public List<BaseFile> query(String fileName) {
+	public List<BaseFile> query(String fileName,String groupName) {
 		BaseFileExample example = new BaseFileExample();
-		if(fileName!=null){
-			example.createCriteria().andFileNameLike("%"+fileName+"%");
+		Criteria criteria=example.createCriteria();
+		if(fileName!=null) {
+			criteria.andFileNameLike("%"+fileName+"%");
 		}
-		List<BaseFile> list = baseFileMapper.selectByExample(example);
-		return list;
+		if(groupName!=null) {
+			criteria.andGroupNameEqualTo(groupName);
+		}
+		
+		return baseFileMapper.selectByExample(example);
+		
 	}
 
 	@Override

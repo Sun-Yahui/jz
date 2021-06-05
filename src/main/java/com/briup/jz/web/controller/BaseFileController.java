@@ -30,10 +30,14 @@ public class BaseFileController {
 	@Autowired
 	public IBaseFileService baseFileService;
 	
-	@ApiOperation(value = "查询所有附件表")
+	@ApiOperation("多条件符合查询")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="fileName",value = "文件名字",paramType = "query"),
+		@ApiImplicitParam(name="groupName",value = "组名",paramType = "query"),
+	})
     @GetMapping("query")
-    public Message query(String fileName){
-        List<BaseFile> list = baseFileService.query(fileName);
+    public Message query(String fileName,String groupName){
+        List<BaseFile> list = baseFileService.query(fileName,groupName);
         return MessageUtil.success(list);
     }
 
@@ -47,7 +51,7 @@ public class BaseFileController {
         return MessageUtil.success("删除成功");
     }
 
-    @ApiOperation(value = "保存或更新资讯附件表信息")
+    @ApiOperation(value="保存或更新附件表信息",notes="如果id为空是保存否则是更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="String"),
             @ApiImplicitParam(name="fileName",value = "文件名字",paramType = "form",required = true,dataType="String"),

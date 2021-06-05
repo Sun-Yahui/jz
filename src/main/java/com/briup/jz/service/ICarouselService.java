@@ -9,7 +9,7 @@ public interface ICarouselService {
 	
     void saveOrUpdate(Carousel carousel) throws CustomerException;
 	
-	List<Carousel> query(String name);
+	List<Carousel> query(String name,String introduce);
 	
 	void deleteById(long id) throws CustomerException;
 }

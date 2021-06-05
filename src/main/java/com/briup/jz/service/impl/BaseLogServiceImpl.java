@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.briup.jz.bean.BaseLog;
 import com.briup.jz.bean.BaseLogExample;
+import com.briup.jz.bean.BaseLogExample.Criteria;
 import com.briup.jz.dao.BaseLogMapper;
 import com.briup.jz.service.IBaseLogService;
 import com.briup.jz.utils.CustomerException;
@@ -31,13 +32,17 @@ public class BaseLogServiceImpl implements IBaseLogService{
 	}
 
 	@Override
-	public List<BaseLog> query(String realname) {
+	public List<BaseLog> query(String realname,String method) {
 		BaseLogExample example = new BaseLogExample();
-		if(realname!=null){
-			example.createCriteria().andRealnameLike("%"+realname+"%");
+		Criteria criteria =example.createCriteria();
+		if(realname!=null) {
+			criteria.andRealnameLike("%"+realname+"%");
 		}
-		List<BaseLog> list = baseLogMapper.selectByExample(example);
-		return list;
+		if(method!=null) {
+			criteria.andMethodEqualTo(method);
+		}
+		
+		return baseLogMapper.selectByExample(example);
 	}
 
 	@Override

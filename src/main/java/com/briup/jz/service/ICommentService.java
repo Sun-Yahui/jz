@@ -10,7 +10,7 @@ public interface ICommentService {
 	
 	void saveOrUpdate(Comment comment) throws CustomerException;
 	
-	List<Comment> query(String comment);
+	List<Comment> query(String comment,String status);
 	
 	void deleteById(long id) throws CustomerException;
 }
