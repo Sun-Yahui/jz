@@ -42,8 +42,7 @@ public class ProductServiceImpl implements IProductService {
         if(productCategoryId!=null){
             example.createCriteria().andProductCategoryIdEqualTo(productCategoryId);
         }
-        List<Product> list = productMapper.selectByExample(example);
-        return list;
+        return productMapper.selectByExample(example);
     }
 
     @Override

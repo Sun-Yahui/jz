@@ -33,13 +33,12 @@ public class AddressServiceImpl implements IAddressService {
     }
 
     @Override
-    public List<Address> pageQuery(String id){
+    public List<Address> pageQuery(String username){
         AddressExample example = new AddressExample();
-        if(id!=null){
-            example.createCriteria().andAddressEqualTo("%"+id+"%");
+        if(username!=null){
+            example.createCriteria().andUsernameLike("%"+username+"%");
         }
-        List<Address> list = addressMapper.selectByExample(example);
-        return list;
+        return addressMapper.selectByExample(example);
     }
 
     @Override
