@@ -13,6 +13,9 @@ import com.briup.jz.bean.AccountCustomer;
 import com.briup.jz.bean.AccountEmployee;
 import com.briup.jz.bean.AccountSystem;
 import com.briup.jz.bean.Platform;
+import com.briup.jz.bean.extend.AccountCustomerExtend;
+import com.briup.jz.bean.extend.AccountEmployeeExtend;
+
 import com.briup.jz.service.IAccountCustomerService;
 import com.briup.jz.service.IAccountEmployeeService;
 import com.briup.jz.service.IAccountSystemService;
@@ -48,8 +51,9 @@ public class AccountController {
 	@ApiImplicitParam(name = "transferTime", value = "开始时间", paramType = "query",dataType="long"),
 	@ApiImplicitParam(name = "endTime", value = "结束时间", paramType = "query",dataType="long"),})
 	public Message pageQueryCustomerAcount(Long page,Long pageSize,String type, String status, Long userId,Long transferTime,Long endTime,Long id) {
-		
-		List<AccountCustomer> list = accountCustomerService.findAll(page,pageSize,type,status,userId, transferTime,endTime,id);
+		List<AccountCustomerExtend> list = accountCustomerService.select(page,pageSize,type,status,userId, transferTime,endTime,id);
+
+		//List<AccountCustomer> list = accountCustomerService.findAll(page,pageSize,type,status,userId, transferTime,endTime,id);
 		return MessageUtil.success(list);
 	}
  
@@ -63,8 +67,9 @@ public class AccountController {
 	@ApiImplicitParam(name = "transferTime", value = "开始时间", paramType = "query",dataType="long"),
 	@ApiImplicitParam(name = "endTime", value = "结束时间", paramType = "query",dataType="long"),})
 	public Message pageQueryEmployeeAcount(Long page,Long pageSize,String type, String status, Long userId,Long transferTime,Long endTime) {
-		
-		List<AccountEmployee> list = accountEmployeeService.findAll(page,pageSize,type,status,userId, transferTime,endTime);
+		List<AccountEmployeeExtend> list = accountEmployeeService.select(page,pageSize,type,status,userId, transferTime,endTime);
+
+		//List<AccountEmployee> list = accountEmployeeService.findAll(page,pageSize,type,status,userId, transferTime,endTime);
 		return MessageUtil.success(list);
 	}
  
@@ -76,7 +81,8 @@ public class AccountController {
 	@ApiImplicitParam(name = "transferTime", value = "开始时间", paramType = "query",dataType="long"),
 	@ApiImplicitParam(name = "endTime", value = "结束时间", paramType = "query",dataType="long"),})
 	public Message pageQuerySystemAcount(Long page,Long pageSize,String type, String status,Long transferTime,Long endTime) {
-		
+		//List<AccountSystemExtend> list = accountSystemService.select(page,pageSize,type,status,transferTime,endTime);
+
 		List<AccountSystem> list = accountSystemService.findAll(page,pageSize,type,status,transferTime,endTime);
 		return MessageUtil.success(list);
 
