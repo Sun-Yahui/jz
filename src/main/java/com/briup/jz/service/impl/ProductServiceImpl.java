@@ -1,7 +1,9 @@
 package com.briup.jz.service.impl;
 
 import com.briup.jz.bean.*;
+import com.briup.jz.bean.extent.ProductExtend;
 import com.briup.jz.dao.ProductMapper;
+import com.briup.jz.dao.extend.ProductExtendMapper;
 import com.briup.jz.service.IProductService;
 import com.briup.jz.utils.CustomerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import java.util.List;
 public class ProductServiceImpl implements IProductService {
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private ProductExtendMapper productExtendMapper;
 
     @Override
     public void saveOrUpdate(Product product) throws CustomerException{
@@ -43,6 +47,11 @@ public class ProductServiceImpl implements IProductService {
             example.createCriteria().andProductCategoryIdEqualTo(productCategoryId);
         }
         return productMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ProductExtend> queryCascade(String name, String status, Long productCategoryId){
+        return productExtendMapper.select(name,status,productCategoryId);
     }
 
     @Override
