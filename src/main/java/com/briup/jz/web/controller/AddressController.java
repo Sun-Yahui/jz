@@ -38,10 +38,10 @@ public class AddressController {
     @GetMapping("pageQuery")
     @ApiOperation("分页查询地址相关信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="userId",value = "用户id",required=true,dataType="long",paramType="query")
+            @ApiImplicitParam(name="username",value = "用户名",dataType="string",paramType="query")
     })
-    public Message pageQuery(String name){
-        List<Address> list = addressService.pageQuery(name);
+    public Message pageQuery(String username){
+        List<Address> list = addressService.pageQuery(username);
         return MessageUtil.success(list);
     }
 
