@@ -23,7 +23,7 @@ public class CustomerExceptionHandler {
         if(exception instanceof CustomerException){
             return MessageUtil.error(exception.getMessage());
         } else if (exception instanceof DataIntegrityViolationException) {
-        	return MessageUtil.error("该数据暂时不允许删除！请先删除与当前数据关联的其他数据");
+        	return MessageUtil.error("数据库异常！");
         }
         return MessageUtil.error("后台接口异常！");
     }
