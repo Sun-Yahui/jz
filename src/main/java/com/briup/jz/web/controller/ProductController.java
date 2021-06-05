@@ -2,6 +2,7 @@ package com.briup.jz.web.controller;
 
 import com.briup.jz.bean.Product;
 import com.briup.jz.bean.ProductCategory;
+import com.briup.jz.bean.extent.ProductExtend;
 import com.briup.jz.service.IProductCategoryService;
 import com.briup.jz.service.IProductService;
 import com.briup.jz.utils.Message;
@@ -52,6 +53,18 @@ public class ProductController {
     })
     public Message pageQuery(String name,String status,Long productCategoryId){
         List<Product> list = productService.pageQuery(name,status,productCategoryId);
+        return MessageUtil.success(list);
+    }
+
+    @GetMapping("queryCascade")
+    @ApiOperation(value = "分页查询产品相关信息",notes = "级联查询出文章所属分类")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="name",value = "产品名称",dataType="string",paramType="query"),
+            @ApiImplicitParam(name="status",value = "产品状态",dataType="string",paramType="query"),
+            @ApiImplicitParam(name="productCategoryId",value = "产品类别分类",dataType="long",paramType="query")
+    })
+    public Message queryCascade(String name,String status,Long productCategoryId){
+        List<ProductExtend> list = productService.queryCascade(name,status,productCategoryId);
         return MessageUtil.success(list);
     }
 

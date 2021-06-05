@@ -4,11 +4,14 @@ import java.util.List;
 
 import com.briup.jz.bean.Category;
 import com.briup.jz.bean.CertificationApply;
+import com.briup.jz.bean.extent.CertificationApplyExtend;
 import com.briup.jz.utils.CustomerException;
 
 public interface ICertificationApplyService {
 
 	void saveOrUpdate(CertificationApply certificationApply) throws CustomerException;
+	
+	List<CertificationApplyExtend> queryCascade(String realName,String status);
 	
 	List<CertificationApply> query(String name);
 	
