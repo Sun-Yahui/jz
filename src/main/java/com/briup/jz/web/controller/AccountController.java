@@ -43,13 +43,13 @@ public class AccountController {
 	@GetMapping("pageQueryCustomerAcount")
 	@ApiImplicitParams({ 
 	@ApiImplicitParam(name = "id", value = "主键", paramType = "query",dataType="int"), 
-	@ApiImplicitParam(name = "status", value = "通过，不通过，未审核", paramType = "query",dataType="String"),
-	@ApiImplicitParam(name = "applyType", value = "充值，提现", paramType = "query",dataType="String"),
+	@ApiImplicitParam(name = "status", value = "状态【正常】", paramType = "query",dataType="String"),
+	@ApiImplicitParam(name = "type", value = "充值，消费", paramType = "query",dataType="String"),
 	@ApiImplicitParam(name = "transferTime", value = "开始时间", paramType = "query",dataType="long"),
 	@ApiImplicitParam(name = "endTime", value = "结束时间", paramType = "query",dataType="long"),})
-	public Message pageQueryCustomerAcount(Long page,Long pageSize,String applyType, String status, Long userId,Long transferTime,Long endTime,Long id) {
+	public Message pageQueryCustomerAcount(Long page,Long pageSize,String type, String status, Long userId,Long transferTime,Long endTime,Long id) {
 		
-		List<AccountCustomer> list = accountCustomerService.findAll(page,pageSize,applyType,status,userId, transferTime,endTime,id);
+		List<AccountCustomer> list = accountCustomerService.findAll(page,pageSize,type,status,userId, transferTime,endTime,id);
 		return MessageUtil.success(list);
 	}
  
@@ -58,7 +58,7 @@ public class AccountController {
 	@ApiImplicitParams({ 
 	
 	@ApiImplicitParam(name = "status", value = "状态【正常】", paramType = "query",dataType="String"),
-	@ApiImplicitParam(name = "type", value = "消费，充值", paramType = "query",dataType="String"),
+	@ApiImplicitParam(name = "type", value = "提现，收益", paramType = "query",dataType="String"),
 	@ApiImplicitParam(name = "userId", value = "雇员编号", paramType = "query",dataType="String"),
 	@ApiImplicitParam(name = "transferTime", value = "开始时间", paramType = "query",dataType="long"),
 	@ApiImplicitParam(name = "endTime", value = "结束时间", paramType = "query",dataType="long"),})

@@ -32,7 +32,7 @@ public class AccountCustomerServiceImpl implements IAccountCustomerService{
 		return true;
 	}
 	@Override
-	public List<AccountCustomer> findAll(Long page,Long pageSize,String applyType, String status, Long userId,Long transferTime,Long endTime,Long id) {
+	public List<AccountCustomer> findAll(Long page,Long pageSize,String type, String status, Long userId,Long transferTime,Long endTime,Long id) {
 		
 		//增加一个参数模板
 		AccountCustomerExample exmple=new AccountCustomerExample();
@@ -49,7 +49,12 @@ public class AccountCustomerServiceImpl implements IAccountCustomerService{
 		if(id != null) {
 			criteria.andIdEqualTo(id);
 		}
-		return accountCustomerMapper.selectByExample(exmple);
+		if(type != null) {
+			criteria.andTypeEqualTo(type);
+		}
+		List<AccountCustomer> list = accountCustomerMapper.selectByExample(exmple);
+		
+		return list ;
 	}
 	
 }
