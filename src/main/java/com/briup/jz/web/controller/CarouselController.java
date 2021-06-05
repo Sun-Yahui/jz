@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.Carousel;
-
 import com.briup.jz.service.ICarouselService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -70,4 +69,5 @@ public class CarouselController {
     	carouselService.saveOrUpdate(carousel);
     	return MessageUtil.success("操作成功");
     }
+    
 }

@@ -7,6 +7,7 @@ import com.briup.jz.utils.CustomerException;
 
 public interface ICarouselService {
 	
+	
     void saveOrUpdate(Carousel carousel) throws CustomerException;
 	
 	List<Carousel> query(String name,String introduce);

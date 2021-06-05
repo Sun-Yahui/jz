@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.briup.jz.bean.Comment;
 import com.briup.jz.bean.CommentExample;
 import com.briup.jz.bean.CommentExample.Criteria;
+import com.briup.jz.bean.extent.CommentExtend;
 import com.briup.jz.dao.CommentMapper;
+import com.briup.jz.dao.extend.CommentExtendMapper;
 import com.briup.jz.service.ICommentService;
 import com.briup.jz.utils.CustomerException;
 
@@ -21,6 +23,9 @@ public class CommentServiceimpl implements ICommentService{
 
 	@Autowired
 	public CommentMapper commentMapper;
+	
+	@Autowired
+	public CommentExtendMapper commentExtendMapper;
 	
 	@Override
 	public void saveOrUpdate(Comment comment) throws CustomerException {
@@ -62,6 +67,13 @@ public class CommentServiceimpl implements ICommentService{
 			commentMapper.deleteByPrimaryKey(id);
 			
 		}
+
+	@Override
+    public List<CommentExtend> queryCascade(String comment, String status) {
+		
+		return commentExtendMapper.select(comment, status);
+	}
+
 		
 	}
 	

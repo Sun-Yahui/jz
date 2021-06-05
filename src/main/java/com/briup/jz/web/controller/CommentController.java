@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.Comment;
+import com.briup.jz.bean.extent.CommentExtend;
 import com.briup.jz.service.ICommentService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -70,5 +71,17 @@ public class CommentController {
 		 	commentService.saveOrUpdate(comment1);
 	    	return MessageUtil.success("操作成功");
 	    }
-	
+	 
+     @ApiOperation(value="多条件符合级联查询",notes="级联查询出资讯评论")
+	 
+	 @ApiImplicitParams({
+		 @ApiImplicitParam(name="comment",value = "评论信息",paramType = "query"),
+		 @ApiImplicitParam(name="status",value = "状态",paramType = "query"),
+	 })
+	 @GetMapping("queryCascade")
+	 public Message queryCascade(String comment,String status){
+	      List<CommentExtend> list = commentService.queryCascade(comment,status);
+	      return MessageUtil.success(list);
+	    }
+
 }

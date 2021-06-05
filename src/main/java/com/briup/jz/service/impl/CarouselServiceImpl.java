@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.briup.jz.bean.Carousel;
 import com.briup.jz.bean.CarouselExample;
 import com.briup.jz.bean.CarouselExample.Criteria;
+
 import com.briup.jz.dao.CarouselMapper;
+
 import com.briup.jz.service.ICarouselService;
 import com.briup.jz.utils.CustomerException;
 
@@ -18,6 +20,7 @@ public class CarouselServiceImpl implements ICarouselService{
 
 	@Autowired
 	public CarouselMapper carouselMapper;
+	
 	
 	@Override
 	public void saveOrUpdate(Carousel carousel) throws CustomerException {

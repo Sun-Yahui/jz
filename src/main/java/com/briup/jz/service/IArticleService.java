@@ -3,9 +3,12 @@ package com.briup.jz.service;
 import java.util.List;
 
 import com.briup.jz.bean.Article;
+import com.briup.jz.bean.extent.ArticleExtend;
 import com.briup.jz.utils.CustomerException;
 
 public interface IArticleService {
+	
+	List<ArticleExtend> queryCascade(String title,String status,Long categoryId);
 	
 	void saveOrUpdate(Article article) throws CustomerException;
 	

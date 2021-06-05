@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.Article;
+import com.briup.jz.bean.extent.ArticleExtend;
 import com.briup.jz.service.IArticleService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -72,4 +73,17 @@ public class ArticleController {
 		articleService.saveOrUpdate(article);
     	return MessageUtil.success("操作成功");
     }
+	
+	@ApiOperation(value="多条件符合级联查询",notes="级联查询出文章所属分类")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="title",value="文章标题",paramType="query"),
+		@ApiImplicitParam(name="status",value="状态[未审核、通过、不通过、推荐]",paramType="query"),
+		@ApiImplicitParam(name="categoryId",value="资讯分类id",paramType="query")
+	})
+	@GetMapping("queryCascade")
+    public Message queryCascade(String title,String status,Long categoryId){
+		List<ArticleExtend> list = articleService.queryCascade(title, status, categoryId);
+        return MessageUtil.success(list);
+    }
+
 }

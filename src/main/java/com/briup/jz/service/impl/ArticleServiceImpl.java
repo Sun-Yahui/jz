@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.briup.jz.bean.Article;
 import com.briup.jz.bean.ArticleExample;
 import com.briup.jz.bean.ArticleExample.Criteria;
+import com.briup.jz.bean.extent.ArticleExtend;
 import com.briup.jz.dao.ArticleMapper;
+import com.briup.jz.dao.extend.ArticleExtendMapper;
 import com.briup.jz.service.IArticleService;
 import com.briup.jz.utils.CustomerException;
 
@@ -18,6 +20,10 @@ public class ArticleServiceImpl implements IArticleService{
 	
 	@Autowired
 	public ArticleMapper articleMapper;
+	
+	@Autowired
+	public ArticleExtendMapper articleExtendMapper;
+
 	
 	@Override
 	public void saveOrUpdate(Article article) throws CustomerException {
@@ -64,6 +70,11 @@ public class ArticleServiceImpl implements IArticleService{
 		}
 		articleMapper.deleteByPrimaryKey(id);
 		
+	}
+
+	@Override
+	public List<ArticleExtend> queryCascade(String title, String status, Long categoryId) {
+		return articleExtendMapper.select(title, status, categoryId);
 	}
 		
 	}

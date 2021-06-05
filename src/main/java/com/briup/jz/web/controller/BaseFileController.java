@@ -56,14 +56,21 @@ public class BaseFileController {
             @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="String"),
             @ApiImplicitParam(name="fileName",value = "文件名字",paramType = "form",required = true,dataType="String"),
             @ApiImplicitParam(name="groupName",value = "组名",paramType = "form",dataType="String"),
-            @ApiImplicitParam(name="uploadTime",value = "上传时间",paramType = "form",dataType="int"),
             @ApiImplicitParam(name="extName",value = "扩展名",paramType = "form",dataType="String"),
-            @ApiImplicitParam(name="fileSize",value = "文件大小",paramType = "form",dataType="int"),
+            @ApiImplicitParam(name="fileSize",value = "文件大小",paramType = "form",dataType="long"),
             @ApiImplicitParam(name="fileType",value = "文件类型",paramType = "form",dataType="String"),
     })
     @PostMapping("saveOrUpdate")
-    public Message saveOrUpdate(BaseFile baseFile){
+    public Message saveOrUpdate(String id,String fileName,String groupName,String extName,Long fileSize,String fileType){
+    	BaseFile baseFile = new BaseFile();
+    	baseFile.setId(id);
+    	baseFile.setFileName(fileName);
+    	baseFile.setGroupName(groupName);
+    	baseFile.setExtName(extName);
+    	baseFile.setFileSize(fileSize);
+    	baseFile.setFileType(fileType);
+    
     	baseFileService.saveOrUpdate(baseFile);
-        return MessageUtil.success("更新成功");
+    	return MessageUtil.success("操作成功");
     }
 }
