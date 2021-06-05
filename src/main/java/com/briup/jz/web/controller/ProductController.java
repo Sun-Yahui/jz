@@ -1,9 +1,7 @@
 package com.briup.jz.web.controller;
 
 import com.briup.jz.bean.Product;
-import com.briup.jz.bean.ProductCategory;
-import com.briup.jz.bean.extent.ProductExtend;
-import com.briup.jz.service.IProductCategoryService;
+import com.briup.jz.bean.extend.ProductExtend;
 import com.briup.jz.service.IProductService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;

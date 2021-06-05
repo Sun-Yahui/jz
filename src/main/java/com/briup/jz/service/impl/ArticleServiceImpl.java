@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.briup.jz.bean.Article;
 import com.briup.jz.bean.ArticleExample;
 import com.briup.jz.bean.ArticleExample.Criteria;
-import com.briup.jz.bean.extent.ArticleExtend;
+import com.briup.jz.bean.extend.ArticleExtend;
 import com.briup.jz.dao.ArticleMapper;
 import com.briup.jz.dao.extend.ArticleExtendMapper;
 import com.briup.jz.service.IArticleService;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.Article;
-import com.briup.jz.bean.extent.ArticleExtend;
+import com.briup.jz.bean.extend.ArticleExtend;
 import com.briup.jz.service.IArticleService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;

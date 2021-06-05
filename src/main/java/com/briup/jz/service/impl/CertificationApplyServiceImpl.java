@@ -7,11 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.briup.jz.bean.Category;
-import com.briup.jz.bean.CategoryExample;
 import com.briup.jz.bean.CertificationApply;
 import com.briup.jz.bean.CertificationApplyExample;
-import com.briup.jz.bean.extent.CertificationApplyExtend;
+import com.briup.jz.bean.extend.CertificationApplyExtend;
 import com.briup.jz.dao.CertificationApplyMapper;
 import com.briup.jz.dao.extend.CertificationApplyExtendMapper;
 import com.briup.jz.service.ICertificationApplyService;

@@ -18,7 +18,7 @@
   </select>
   
   <resultMap 
-  	type="com.briup.jz.bean.extent.ArticleExtend" 
+  	type="com.briup.jz.bean.extend.ArticleExtend"
   	extends="com.briup.jz.dao.ArticleMapper.BaseResultMap"
   	id="ArticleExtendResultMap">
   	<!-- 基本属性从extends中已经继承 -->

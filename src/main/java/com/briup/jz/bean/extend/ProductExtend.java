@@ -1,4 +1,4 @@
-package com.briup.jz.bean.extent;
+package com.briup.jz.bean.extend;
 
 import com.briup.jz.bean.Product;
 import com.briup.jz.bean.ProductCategory;

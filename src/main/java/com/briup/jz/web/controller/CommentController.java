@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.Comment;
-import com.briup.jz.bean.extent.CommentExtend;
+import com.briup.jz.bean.extend.CommentExtend;
 import com.briup.jz.service.ICommentService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;

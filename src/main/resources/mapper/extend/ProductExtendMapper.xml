@@ -20,7 +20,7 @@
 
   <resultMap
           id="ProductExtendResultMap"
-          type="com.briup.jz.bean.extent.ProductExtend"
+          type="com.briup.jz.bean.extend.ProductExtend"
           extends="com.briup.jz.dao.ProductMapper.BaseResultMap">
           <!--多对一映射-->
           <association property="productCategory"

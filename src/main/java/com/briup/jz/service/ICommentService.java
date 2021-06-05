@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.briup.jz.bean.Comment;
-import com.briup.jz.bean.extent.CommentExtend;
+import com.briup.jz.bean.extend.CommentExtend;
 import com.briup.jz.utils.CustomerException;
 
 public interface ICommentService {

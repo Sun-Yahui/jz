@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.briup.jz.bean.Comment;
 import com.briup.jz.bean.CommentExample;
 import com.briup.jz.bean.CommentExample.Criteria;
-import com.briup.jz.bean.extent.CommentExtend;
+import com.briup.jz.bean.extend.CommentExtend;
 import com.briup.jz.dao.CommentMapper;
 import com.briup.jz.dao.extend.CommentExtendMapper;
 import com.briup.jz.service.ICommentService;

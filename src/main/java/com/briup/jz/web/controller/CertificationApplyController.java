@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.CertificationApply;
-import com.briup.jz.bean.extent.CertificationApplyExtend;
+import com.briup.jz.bean.extend.CertificationApplyExtend;
 import com.briup.jz.service.ICertificationApplyService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;

@@ -2,9 +2,8 @@ package com.briup.jz.service;
 
 import java.util.List;
 
-import com.briup.jz.bean.Category;
 import com.briup.jz.bean.CertificationApply;
-import com.briup.jz.bean.extent.CertificationApplyExtend;
+import com.briup.jz.bean.extend.CertificationApplyExtend;
 import com.briup.jz.utils.CustomerException;
 
 public interface ICertificationApplyService {

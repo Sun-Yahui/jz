@@ -1,7 +1,7 @@
 package com.briup.jz.service.impl;
 
 import com.briup.jz.bean.*;
-import com.briup.jz.bean.extent.ProductExtend;
+import com.briup.jz.bean.extend.ProductExtend;
 import com.briup.jz.dao.ProductMapper;
 import com.briup.jz.dao.extend.ProductExtendMapper;
 import com.briup.jz.service.IProductService;

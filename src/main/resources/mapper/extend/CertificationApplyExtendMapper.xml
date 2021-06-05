@@ -24,7 +24,7 @@
 
   
   </select>
-  <resultMap type="com.briup.jz.bean.extent.CertificationApplyExtend" 
+  <resultMap type="com.briup.jz.bean.extend.CertificationApplyExtend"
   extends = "com.briup.jz.dao.CertificationApplyMapper.BaseResultMap"
   id="CertificationApplyExtendResultMap">
   <association 
