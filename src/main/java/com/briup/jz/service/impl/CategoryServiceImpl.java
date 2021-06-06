@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.briup.jz.bean.Category;
 import com.briup.jz.bean.CategoryExample;
+import com.briup.jz.bean.extend.CategoryExtend;
 import com.briup.jz.dao.CategoryMapper;
+import com.briup.jz.dao.extend.CategoryExtendMapper;
 import com.briup.jz.service.ICategoryService;
 import com.briup.jz.utils.CustomerException;
 
@@ -16,6 +18,10 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
+    
+    @Autowired
+    
+    public CategoryExtendMapper categoryExtendMapper;
 
     @Override
     public void saveOrUpdate(Category category) throws CustomerException {
@@ -52,5 +58,11 @@ public class CategoryServiceImpl implements ICategoryService {
         categoryMapper.deleteByPrimaryKey(id);
 
     }
+
+	@Override
+	public CategoryExtend look(Long id) {
+		
+		return categoryExtendMapper.selectById(id);
+	}
 
 }

@@ -15,4 +15,6 @@ public interface IArticleService {
 	List<Article> query(String title,String status, Long categoryId);
 	
 	void deleteById(long id) throws CustomerException;
+
+	ArticleExtend read(Long id);
 }

@@ -85,5 +85,15 @@ public class ArticleController {
 		List<ArticleExtend> list = articleService.queryCascade(title, status, categoryId);
         return MessageUtil.success(list);
     }
+	
+	@ApiOperation("阅读文章")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="id",value="文章id",paramType="query",required=true),
+	})
+	@GetMapping("read")
+	public Message read(Long id) {
+		ArticleExtend article=articleService.read(id);
+		return MessageUtil.success(article);
+	}
 
 }

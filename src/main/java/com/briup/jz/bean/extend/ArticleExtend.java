@@ -1,8 +1,11 @@
 package com.briup.jz.bean.extend;
 
+import java.util.List;
+
 import com.briup.jz.bean.Article;
 import com.briup.jz.bean.BaseUser;
 import com.briup.jz.bean.Category;
+import com.briup.jz.bean.Comment;
 
 public class ArticleExtend extends Article {
 	private static final long serialVersionUID = 1L;
@@ -10,6 +13,8 @@ public class ArticleExtend extends Article {
 	private Category category;
 	
 	private BaseUser author;
+	
+	private List<Comment> comments;
 
 	public Category getCategory() {
 		return category;
@@ -25,6 +30,14 @@ public class ArticleExtend extends Article {
 
 	public void setAuthor(BaseUser author) {
 		this.author = author;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 	
 	

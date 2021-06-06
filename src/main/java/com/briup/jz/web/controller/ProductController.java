@@ -1,5 +1,6 @@
 package com.briup.jz.web.controller;
 
+import com.briup.jz.bean.OrderLine;
 import com.briup.jz.bean.Product;
 import com.briup.jz.bean.extend.ProductExtend;
 import com.briup.jz.service.IProductService;
@@ -27,6 +28,17 @@ public class ProductController {
 
     @Autowired
     private IProductService productService;
+
+
+    @GetMapping("order")
+    @ApiOperation("产品订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",value = "产品订单编号",required=true,dataType="long",paramType="query")
+    })
+    public Message order(Long id){
+        ProductExtend product = productService.order(id);
+        return MessageUtil.success(product);
+    }
 
     @PostMapping("saveOrUpdate")
     @ApiOperation(value = "保存或更新产品信息",notes = "如果ID不为空，为修改操作，根据ID进行修改；如果ID为空，为保存操作")

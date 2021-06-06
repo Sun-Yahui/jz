@@ -76,6 +76,12 @@ public class ArticleServiceImpl implements IArticleService{
 	public List<ArticleExtend> queryCascade(String title, String status, Long categoryId) {
 		return articleExtendMapper.select(title, status, categoryId);
 	}
+
+	@Override
+	public ArticleExtend read(Long id) {
+		
+		return articleExtendMapper.selectById(id);
+	}
 		
 	}
 	
