@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.Category;
+import com.briup.jz.bean.extend.CategoryExtend;
 import com.briup.jz.service.ICategoryService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -47,7 +48,7 @@ public class CategoryController {
         return MessageUtil.success("删除成功");
     }
 
-    @ApiOperation(value = "保存或更新资讯分类信息")
+    @ApiOperation(value="保存或更新资讯信息",notes="如果id为空是保存否则是更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="int"),
             @ApiImplicitParam(name="name",value = "栏目名称",paramType = "form",required = true,dataType="String"),
@@ -59,5 +60,16 @@ public class CategoryController {
     public Message saveOrUpdate(Category category){
         categoryService.saveOrUpdate(category);
         return MessageUtil.success("更新成功");
+    }
+    
+    @ApiOperation("查看资讯")
+    @ApiImplicitParams({
+    	 @ApiImplicitParam(name="id",value = "资讯id",paramType = "query",dataType="Long"),
+    })
+    @GetMapping("look")
+    
+    public Message look(Long id) {
+    	CategoryExtend category=categoryService.look(id);
+    	return MessageUtil.success(category);
     }
 }
