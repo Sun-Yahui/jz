@@ -14,10 +14,15 @@ public class BaseUserExtend extends BaseUser{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private List<Comment> comment;
+	
 	private List<AccountApply> accountApply;
+	
 	private List<AccountCustomer> accountCustomer;
+	
 	private List<AccountEmployee> accountEmployee;
+	
 	public List<AccountApply> getAccountApply() {
 		return accountApply;
 	}
