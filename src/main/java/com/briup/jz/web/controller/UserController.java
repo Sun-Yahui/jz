@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.BaseUser;
+import com.briup.jz.bean.extend.BaseUserExtend;
 import com.briup.jz.service.IUserService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -36,6 +37,21 @@ public class UserController {
         @ApiImplicitParam(name="status",value = "实名制状态[正常、禁用]",paramType = "query"),})
     public Message query(String username,String status){
         List<BaseUser> list = userService.query(username,status);
+        return MessageUtil.success(list);
+    }
+    
+    @ApiOperation(value = "查询用户账户下所有信息")
+    @GetMapping("selectByIdToAccount")
+    public Message selectByIdToAccount(Long id){
+        return MessageUtil.success( userService.selectByIdToAccount(id));
+    }
+    
+    @ApiOperation(value = "查询用户信息")
+    @GetMapping("read")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name="id",value = "id",paramType = "query"),})
+    public Message read(long id){
+    	BaseUserExtend list = userService.read(id);
         return MessageUtil.success(list);
     }
 

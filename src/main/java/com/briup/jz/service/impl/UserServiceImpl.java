@@ -10,7 +10,9 @@ import com.briup.jz.bean.BaseUser;
 import com.briup.jz.bean.BaseUserExample;
 
 import com.briup.jz.bean.BaseUserExample.Criteria;
+import com.briup.jz.bean.extend.BaseUserExtend;
 import com.briup.jz.dao.BaseUserMapper;
+import com.briup.jz.dao.extend.BaseUserExtendMapper;
 import com.briup.jz.service.IUserService;
 import com.briup.jz.utils.CustomerException;
 
@@ -18,6 +20,9 @@ import com.briup.jz.utils.CustomerException;
 public class UserServiceImpl implements IUserService{
 	@Autowired
 	private BaseUserMapper baseUserMapper;
+	
+	@Autowired
+	private BaseUserExtendMapper baseUserExtendMapper;
 
 	@Override
 	public void saveOrUpdate(BaseUser baseUser) throws CustomerException {
@@ -40,7 +45,6 @@ public class UserServiceImpl implements IUserService{
 		// TODO Auto-generated method stub
 		BaseUserExample example=new BaseUserExample();
 		Criteria criteria =example.createCriteria();
-		System.out.println(username+status);
 		if(username!=null) {
 			criteria.andUsernameLike("%"+username+"%");
 		}
@@ -60,5 +64,19 @@ public class UserServiceImpl implements IUserService{
 		baseUserMapper.deleteByPrimaryKey(id);
 		
 	}
+
+	@Override
+	public BaseUserExtend read(long id) {
+		// TODO Auto-generated method stub
+		return baseUserExtendMapper.selectById(id);
+	}
+
+	@Override
+	public List<BaseUserExtend> selectByIdToAccount(Long id) {
+		// TODO Auto-generated method stub
+		return baseUserExtendMapper.selectByIdToAccount(id);
+	}
+
+	
 
 }

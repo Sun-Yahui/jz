@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.BaseUserRole;
+import com.briup.jz.bean.extend.BaseUserRoleExtend;
 import com.briup.jz.service.IUserRoleService;
 import com.briup.jz.utils.Message;
 import com.briup.jz.utils.MessageUtil;
@@ -33,6 +34,13 @@ public class UserRoleController {
     @GetMapping("query")
     public Message query(){
         List<BaseUserRole> list = iUserRoleService.query();
+        return MessageUtil.success(list);
+    }
+    
+    @ApiOperation(value = "查询所有id")
+    @GetMapping("queryCascade")
+    public Message queryCascade(long id){
+        List<BaseUserRoleExtend> list = iUserRoleService.queryCascade(id);
         return MessageUtil.success(list);
     }
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.jz.dao.extend.BaseUserExtendMapper">
+<select id="selectById" resultMap="BaseUserExtendResult">
+select * from base_user where id = #{id}
+</select>
+
+  
+	
+  <resultMap type="com.briup.jz.bean.extend.BaseUserExtend" 
+  extends="com.briup.jz.dao.BaseRoleMapper.BaseResultMap"
+  id="BaseUserExtendResult">
+  <collection property="comment"
+  column="id"
+  select="com.briup.jz.dao.extend.CommentExtendMapper.selectById">
+  
+  </collection>
+  </resultMap>
+  
+<!--   刘路 -->
+  <select id="selectByIdToAccount"
+		resultMap="com.briup.jz.dao.BaseUserMapper.BaseResultMap">
+		select * from base_user
+		<where>
+			<if test="id!=null">
+				and id = #{id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap type="com.briup.jz.bean.extend.BaseUserExtend"
+		extends="com.briup.jz.dao.BaseUserMapper.BaseResultMap"
+		id="BaseUserToAccountExtendResultMap">
+		<collection property="accountApply" column="id"
+			select="com.briup.jz.dao.extend.AccountApplyExtendMapper.selectToAccountApply">
+		</collection>
+		<collection property="accountCustomer" column="id"
+			select="com.briup.jz.dao.extend.AccountCustomerExtendMapper.selectToAccountApply">
+		</collection>
+		<collection property="accountEmployee" column="id"
+			select="com.briup.jz.dao.extend.AccountEmployeeExtendMapper.selectToAccountApply">
+		</collection>
+		</resultMap>
+</mapper>

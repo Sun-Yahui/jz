@@ -11,7 +11,9 @@ import com.briup.jz.bean.BaseUser;
 import com.briup.jz.bean.BaseUserExample;
 import com.briup.jz.bean.BaseUserRole;
 import com.briup.jz.bean.BaseUserRoleExample;
+import com.briup.jz.bean.extend.BaseUserRoleExtend;
 import com.briup.jz.dao.BaseUserRoleMapper;
+import com.briup.jz.dao.extend.BaseUserRoleExtendMapper;
 import com.briup.jz.service.IUserRoleService;
 import com.briup.jz.utils.CustomerException;
 
@@ -20,6 +22,9 @@ public class UserRoleServiceImpl implements IUserRoleService{
 	
 	@Autowired
 	private BaseUserRoleMapper baseUserRoleMapper;
+	
+	@Autowired
+	private BaseUserRoleExtendMapper baseUserRoleExtendMapper;
 
 	@Override
 	public void saveOrUpdate(BaseUserRole baseUserRole) throws CustomerException {
@@ -61,6 +66,14 @@ public class UserRoleServiceImpl implements IUserRoleService{
 		
 		
 		return baseUserRoleMapper.selectByExample(example);
+	}
+
+
+
+	@Override
+	public List<BaseUserRoleExtend> queryCascade(long id) {
+		// TODO Auto-generated method stub
+		return baseUserRoleExtendMapper.select(id);
 	}
 
 }

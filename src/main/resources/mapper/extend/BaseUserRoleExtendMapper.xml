@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.jz.dao.extend.BaseUserRoleExtendMapper">
+
+<select id="select" resultMap="BaseUserRoleExtendResultMap">
+select * from base_user_role where id = #{id}
+
+</select>
+
+<resultMap type="com.briup.jz.bean.extend.BaseUserRoleExtend" 
+extends="com.briup.jz.dao.BaseUserRoleMapper.BaseResultMap"
+id="BaseUserRoleExtendResultMap">
+<association property="baseUser" column="user_id"
+select="com.briup.jz.dao.BaseUserMapper.selectByPrimaryKey"></association>
+
+</resultMap>
+  
+</mapper>
