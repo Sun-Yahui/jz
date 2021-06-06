@@ -15,4 +15,6 @@ public interface IProductService {
     List<ProductExtend> queryCascade(String name, String status, Long productCategordId);
 
     void deleteById(long id) throws CustomerException;
+
+    ProductExtend order(Long id);
 }

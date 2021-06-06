@@ -15,17 +15,41 @@
               and product_category_id = #{productCategoryId}
           </if>
       </where>
-
   </select>
 
-  <resultMap
+  <select id="selectById" resultMap="ProductWithAllResultMap">
+      select *
+      from jz_product
+      where id = #{id}
+  </select>
+
+    <resultMap
+            id="ProductWithAllResultMap"
+            type="com.briup.jz.bean.extend.ProductExtend"
+            extends="com.briup.jz.dao.ProductMapper.BaseResultMap">
+        <!-- 基本属性从extends中已经继承 -->
+        <!--一对多映射-->
+        <association property="productCategory"
+                     column="product_category_id"
+                     select="com.briup.jz.dao.ProductCategoryMapper.selectByPrimaryKey">
+        </association>
+        <!--一对多  根据商品id查询订单-->
+        <collection property="order"
+                    column="id"
+                    select="com.briup.jz.dao.extend.OrderLineExtendMapper.selectByProductId"></collection>
+    </resultMap>
+
+    <resultMap
           id="ProductExtendResultMap"
           type="com.briup.jz.bean.extend.ProductExtend"
           extends="com.briup.jz.dao.ProductMapper.BaseResultMap">
+          <!-- 基本属性从extends中已经继承 -->
           <!--多对一映射-->
           <association property="productCategory"
                        column="product_category_id"
                        select="com.briup.jz.dao.ProductCategoryMapper.selectByPrimaryKey">
           </association>
-  </resultMap>
+    </resultMap>
+
+
 </mapper>

@@ -50,11 +50,6 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public List<ProductExtend> queryCascade(String name, String status, Long productCategoryId){
-        return productExtendMapper.select(name,status,productCategoryId);
-    }
-
-    @Override
     public  void deleteById(long id) throws CustomerException {
         Product product = productMapper.selectByPrimaryKey(id);
         if (product == null) {
@@ -62,4 +57,25 @@ public class ProductServiceImpl implements IProductService {
         }
         productMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<ProductExtend> queryCascade(String name, String status, Long productCategoryId){
+        return productExtendMapper.select(name,status,productCategoryId);
+    }
+
+    @Override
+    public ProductExtend order(Long id){
+        return productExtendMapper.selectById(id);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
