@@ -10,6 +10,7 @@ select * from base_user where id = #{id}
   <resultMap type="com.briup.jz.bean.extend.BaseUserExtend" 
   extends="com.briup.jz.dao.BaseRoleMapper.BaseResultMap"
   id="BaseUserExtendResult">
+<!--   一对多 -->
   <collection property="comment"
   column="id"
   select="com.briup.jz.dao.extend.CommentExtendMapper.selectById">

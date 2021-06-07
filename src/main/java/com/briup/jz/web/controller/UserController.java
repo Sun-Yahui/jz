@@ -1,6 +1,8 @@
 package com.briup.jz.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
@@ -93,4 +95,22 @@ public class UserController {
     	userService.saveOrUpdate(baseUser);
         return MessageUtil.success("更新成功");
     }
+
+    // 这里是假登录
+    @PostMapping("login")
+    public Message login(String username,String password) {
+        Map<String, String> map = new HashMap<>();
+        map.put("token", "admin");
+        return MessageUtil.success(map);
+    }
+
+    // 这里是假获取用户信息
+    @GetMapping("info")
+    public Message info(String token) {
+        BaseUser user = new BaseUser();
+        user.setRealname("张三");
+        user.setUserFace("http://121.199.29.84:8888/group1/M00/00/16/rBD-SV_EpjyAa0qIAAA-lQCALyU911.jpg");
+        return MessageUtil.success(user);
+    }
+
 }
