@@ -112,5 +112,11 @@ public class UserController {
         user.setUserFace("http://121.199.29.84:8888/group1/M00/00/16/rBD-SV_EpjyAa0qIAAA-lQCALyU911.jpg");
         return MessageUtil.success(user);
     }
+    
+ // 这里是假退出
+ 	@PostMapping("logout")
+ 	public Message logout() {
+ 		return MessageUtil.success(null);
+ 	}
 
 }
