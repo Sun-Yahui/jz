@@ -59,10 +59,10 @@ private AccountEmployeeMapper accountEmployeeMapper;
 	}
 
 	@Override
-	public List<AccountEmployeeExtend> select(Long page, Long pageSize, String type, String status, Long userId,
+	public List<AccountEmployeeExtend> select(Long page,Long id ,Long pageSize, String type, String status, Long userId,
 			Long transferTime, Long endTime) {
 		// TODO Auto-generated method stub
-		return accountEmployeeExtendMapper.select(page, pageSize, type, status, userId, transferTime, endTime);
+		return accountEmployeeExtendMapper.select(page, pageSize,id, type, status, userId, transferTime, endTime);
 	}
 
 }

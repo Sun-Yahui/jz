@@ -66,8 +66,8 @@ public class AccountController {
 	@ApiImplicitParam(name = "userId", value = "雇员编号", paramType = "query",dataType="String"),
 	@ApiImplicitParam(name = "transferTime", value = "开始时间", paramType = "query",dataType="long"),
 	@ApiImplicitParam(name = "endTime", value = "结束时间", paramType = "query",dataType="long"),})
-	public Message pageQueryEmployeeAcount(Long page,Long pageSize,String type, String status, Long userId,Long transferTime,Long endTime) {
-		List<AccountEmployeeExtend> list = accountEmployeeService.select(page,pageSize,type,status,userId, transferTime,endTime);
+	public Message pageQueryEmployeeAcount(Long page,Long pageSize,String type, Long id,String status, Long userId,Long transferTime,Long endTime) {
+		List<AccountEmployeeExtend> list = accountEmployeeService.select(page,pageSize,id,type,status,userId, transferTime,endTime);
 
 		//List<AccountEmployee> list = accountEmployeeService.findAll(page,pageSize,type,status,userId, transferTime,endTime);
 		return MessageUtil.success(list);
