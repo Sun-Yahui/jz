@@ -19,7 +19,7 @@ select * from base_user where id = #{id}
   
 <!--   刘路 -->
   <select id="selectByIdToAccount"
-		resultMap="com.briup.jz.dao.BaseUserMapper.BaseResultMap">
+		resultMap="BaseUserToAccountExtendResultMap">
 		select * from base_user
 		<where>
 			<if test="id!=null">
