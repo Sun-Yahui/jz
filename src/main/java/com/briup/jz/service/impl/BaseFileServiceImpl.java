@@ -1,11 +1,10 @@
 package com.briup.jz.service.impl;
 
-import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 
 import com.briup.jz.bean.BaseFile;
@@ -24,16 +23,18 @@ public class BaseFileServiceImpl implements IBaseFileService{
 	@Override
 	public void saveOrUpdate(BaseFile baseFile) throws CustomerException {
 	
-		if(baseFile.getId()!= null) {
-			// 初始化
-			baseFile.setUploadTime(new Date().getTime());
-			
+		if (baseFile.getId() != null) {
 			baseFileMapper.updateByPrimaryKey(baseFile);
-		}else{
-			baseFile.setUploadTime(new Date().getTime());
-			baseFileMapper.insert(baseFile);
-			
-		}
+        } else {
+            // 判断是否有同名的分类，如果有抛出异常
+        	BaseFileExample example = new BaseFileExample();
+            example.createCriteria().andFileNameEqualTo(baseFile.getFileName());
+            List<BaseFile> list = baseFileMapper.selectByExample(example);
+            if (list.size() > 0) {
+                throw new CustomerException("同名的分类已存在");
+            }
+            baseFileMapper.insert(baseFile);
+        }
 		
 	}
 

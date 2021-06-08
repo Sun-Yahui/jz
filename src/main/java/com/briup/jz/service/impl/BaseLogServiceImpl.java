@@ -1,10 +1,11 @@
 package com.briup.jz.service.impl;
 
-import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.briup.jz.bean.BaseLog;
 import com.briup.jz.bean.BaseLogExample;
@@ -21,13 +22,18 @@ public class BaseLogServiceImpl implements IBaseLogService{
 	
 	@Override
 	public void saveOrUpdate(BaseLog baseLog) throws CustomerException {
-		if(baseLog.getId() == null) {
-			// 初始化
-			baseLog.setLogTime(new Date().getTime());
-		} else {
-			baseLog.setLogTime(new Date().getTime());
+		if (baseLog.getId() != null) {
 			baseLogMapper.updateByPrimaryKey(baseLog);
-		}
+        } else {
+            // 判断是否有同名的分类，如果有抛出异常
+        	BaseLogExample example = new BaseLogExample();
+            example.createCriteria().andRealnameEqualTo(baseLog.getRealname());
+            List<BaseLog> list = baseLogMapper.selectByExample(example);
+            if (list.size() > 0) {
+                throw new CustomerException("同名的分类已存在");
+            }
+            baseLogMapper.insert(baseLog);
+        }
 		
 	}
 
