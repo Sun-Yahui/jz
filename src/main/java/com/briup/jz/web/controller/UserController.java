@@ -51,7 +51,7 @@ public class UserController {
     @ApiOperation(value = "查询用户信息")
     @GetMapping("read")
     @ApiImplicitParams({
-        @ApiImplicitParam(name="id",value = "id",paramType = "query"),})
+        @ApiImplicitParam(name="id",value = "id",paramType = "query",required=true)})
     public Message read(long id){
     	BaseUserExtend list = userService.read(id);
         return MessageUtil.success(list);
