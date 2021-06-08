@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
+import com.briup.jz.bean.Carousel;
+import com.briup.jz.bean.CarouselExample;
 import com.briup.jz.bean.Comment;
 import com.briup.jz.bean.CommentExample;
 import com.briup.jz.bean.CommentExample.Criteria;
@@ -29,19 +29,18 @@ public class CommentServiceimpl implements ICommentService{
 	
 	@Override
 	public void saveOrUpdate(Comment comment) throws CustomerException {
-		if(comment.getId() == null) {
-			// 初始化
-			comment.setCommentTime(new Date().getTime());
-			comment.setStatus("通过");
-			comment.setArticleId(68l);
-			commentMapper.insert(comment);
-		} else {
-			comment.setCommentTime(new Date().getTime());
-			comment.setStatus("通过");
-			comment.setArticleId(68l);
+		if (comment.getId() != null) {
 			commentMapper.updateByPrimaryKey(comment);
-		}
-		
+        } else {
+            // 判断是否有同名的分类，如果有抛出异常
+        	CommentExample example = new CommentExample();
+            example.createCriteria().andCommentEqualTo(comment.getComment());
+            List<Comment> list = commentMapper.selectByExample(example);
+            if (list.size() > 0) {
+                throw new CustomerException("同名的分类已存在");
+            }
+            commentMapper.insert(comment);
+        }
 	}
 
 	@Override

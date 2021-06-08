@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.jz.bean.Article;
+
 import com.briup.jz.bean.extend.ArticleExtend;
 import com.briup.jz.service.IArticleService;
 import com.briup.jz.utils.Message;
@@ -58,20 +59,19 @@ public class ArticleController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="id",value="编号[更新的时候需要填写]",paramType="form"),
 		@ApiImplicitParam(name="title",value="文章标题", required=true, paramType="form"),
-		@ApiImplicitParam(name="content",value="文章主体内容",required=true,paramType="form"),
-		@ApiImplicitParam(name="cover",value="缩略图",required=true,paramType="form"),
-		@ApiImplicitParam(name="categoryId",value="资讯分类id",required=true,paramType="form")
+		@ApiImplicitParam(name="content",value="文章主体内容",paramType="form"),
+		@ApiImplicitParam(name="cover",value="缩略图",paramType="form"),
+		@ApiImplicitParam(name="categoryId",value="资讯分类id",paramType="form"),
+		@ApiImplicitParam(name="publishTime",value="出版时间",paramType="form"),
+		@ApiImplicitParam(name="readTimes",value="阅读次数",  paramType="form"),
+		@ApiImplicitParam(name="status",value="状态",paramType="form"),
+		@ApiImplicitParam(name="thumpUp",value="点赞数",paramType="form"),
+		@ApiImplicitParam(name="authorId",value="作者id",paramType="form")
 	})
 	@PostMapping("saveOrUpdate")
-    public Message saveOrUpdate(Long id,String title,String content,String cover,Long categoryId) {
-		Article article = new Article();
-		article.setId(id);
-		article.setTitle(title);
-		article.setCategoryId(categoryId);
-		article.setContent(content);
-		article.setCover(cover);
+    public Message saveOrUpdate(Article article) {
 		articleService.saveOrUpdate(article);
-    	return MessageUtil.success("操作成功");
+        return MessageUtil.success("更新成功");
     }
 	
 	@ApiOperation(value="多条件符合级联查询",notes="级联查询出文章所属分类")

@@ -27,20 +27,18 @@ public class ArticleServiceImpl implements IArticleService{
 	
 	@Override
 	public void saveOrUpdate(Article article) throws CustomerException {
-		if(article.getId() == null) {
-			// 初始化
-			article.setPublishTime(new Date().getTime());
-			article.setReadTimes(0l);
-			article.setThumpUp(0l);
-			article.setStatus("未审核");
-			articleMapper.insert(article);
-		} else {
-			article.setPublishTime(new Date().getTime());
-			article.setReadTimes(0l);
-			article.setThumpUp(0l);
-			article.setStatus("未审核");
+		if (article.getId() != null) {
 			articleMapper.updateByPrimaryKey(article);
-		}
+        } else {
+            // 判断是否有同名的分类，如果有抛出异常
+        	ArticleExample example = new ArticleExample();
+            example.createCriteria().andTitleEqualTo(article.getTitle());
+            List<Article> list = articleMapper.selectByExample(example);
+            if (list.size() > 0) {
+                throw new CustomerException("同名的分类已存在");
+            }
+            articleMapper.insert(article);
+        }
 		
 	}
 

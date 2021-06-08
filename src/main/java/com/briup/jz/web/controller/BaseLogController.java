@@ -57,18 +57,14 @@ public class BaseLogController {
     @ApiImplicitParams({
             @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="Long"),
             @ApiImplicitParam(name="realname",value = "真实名字",paramType = "form",required = true,dataType="String"),
-            @ApiImplicitParam(name="method",value = "方法",paramType = "form",required = true,dataType="String"),
-            @ApiImplicitParam(name="content",value = "文章",paramType = "form",required = true,dataType="String"),
+            @ApiImplicitParam(name="method",value = "方法",paramType = "form",dataType="String"),
+            @ApiImplicitParam(name="content",value = "文章",paramType = "form",dataType="String"),
+            @ApiImplicitParam(name="logTime",value = "日志时间",paramType = "form",dataType="Long"),
     })
     @PostMapping("saveOrUpdate")
-    public Message saveOrUpdate(Long id,String realname,String method,String content){
-    	BaseLog baseLog = new BaseLog();
-    	baseLog.setId(id);
-    	baseLog.setRealname(realname);
-    	baseLog.setMethod(method);
-    	baseLog.setContent(content);
+    public Message saveOrUpdate(BaseLog baseLog){
     	baseLogService.saveOrUpdate(baseLog);
-    	return MessageUtil.success("操作成功");
+        return MessageUtil.success("更新成功");
     }
 	
 	

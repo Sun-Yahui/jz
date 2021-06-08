@@ -56,18 +56,14 @@ public class CarouselController {
     @ApiImplicitParams({
             @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="Long"),
             @ApiImplicitParam(name="name",value = "轮播图名称",paramType = "form",required = true,dataType="String"),
-            @ApiImplicitParam(name="introduce",value = "轮播图介绍",paramType = "form",required = true,dataType="String"),
+            @ApiImplicitParam(name="introduce",value = "轮播图介绍",paramType = "form",dataType="String"),
             @ApiImplicitParam(name="url",value = "路径",paramType = "form",dataType="String"),
+            @ApiImplicitParam(name="status",value = "状态",paramType = "form",dataType="String"),
     })
     @PostMapping("saveOrUpdate")
-    public Message saveOrUpdate(Long id,String name,String introduce,String url){
-    	Carousel carousel = new Carousel();
-    	carousel.setId(id);
-    	carousel.setName(name);
-    	carousel.setIntroduce(introduce);
-    	carousel.setUrl(url);
+    public Message saveOrUpdate(Carousel carousel){
     	carouselService.saveOrUpdate(carousel);
-    	return MessageUtil.success("操作成功");
+        return MessageUtil.success("更新成功");
     }
     
 }

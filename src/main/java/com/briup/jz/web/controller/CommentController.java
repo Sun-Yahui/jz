@@ -59,17 +59,18 @@ public class CommentController {
 	    @ApiImplicitParams({
 	            @ApiImplicitParam(name="id",value = "主键",paramType = "form",dataType="Long"),
 	            @ApiImplicitParam(name="comment",value = "评论信息",paramType = "form",required = true,dataType="String"),        
-	            @ApiImplicitParam(name="userId",value = "用户id",paramType = "form",required = true,dataType="Long"),
+	            @ApiImplicitParam(name="commentTime",value = "评论时间",paramType = "form",dataType="Long"),
+	            @ApiImplicitParam(name="reply",value = "回答",paramType = "form",dataType="Long"),
+	            @ApiImplicitParam(name="replyTime",value = "答复时间",paramType = "form",dataType="String"),        
+	            @ApiImplicitParam(name="status",value = "状态",paramType = "form",dataType="Long"),
+	            @ApiImplicitParam(name="userId",value = "用户id",paramType = "form",dataType="Long"),
+	            @ApiImplicitParam(name="articleId",value = "文章id",paramType = "form",dataType="String"),       
 	           
 	    })
 	    @PostMapping("saveOrUpdate")
-	    public Message saveOrUpdate(Long id,String comment,Long userId){
-		 	Comment comment1 = new Comment();
-		 	comment1.setId(id);
-		 	comment1.setComment(comment);
-		 	comment1.setUserId(userId);
-		 	commentService.saveOrUpdate(comment1);
-	    	return MessageUtil.success("操作成功");
+	    public Message saveOrUpdate(Comment comment){
+		    commentService.saveOrUpdate(comment);
+	        return MessageUtil.success("更新成功");
 	    }
 	 
      @ApiOperation(value="多条件符合级联查询",notes="级联查询出资讯评论")

@@ -1,10 +1,11 @@
 package com.briup.jz.service.impl;
 
-import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.briup.jz.bean.Carousel;
 import com.briup.jz.bean.CarouselExample;
@@ -24,14 +25,18 @@ public class CarouselServiceImpl implements ICarouselService{
 	
 	@Override
 	public void saveOrUpdate(Carousel carousel) throws CustomerException {
-		if(carousel.getId() == null) {
-			// 初始化
-			carousel.setStatus("正常");
-			carouselMapper.insert(carousel);
-		} else {
-			carousel.setStatus("正常");
+		if (carousel.getId() != null) {
 			carouselMapper.updateByPrimaryKey(carousel);
-		}
+        } else {
+            // 判断是否有同名的分类，如果有抛出异常
+        	CarouselExample example = new CarouselExample();
+            example.createCriteria().andNameEqualTo(carousel.getName());
+            List<Carousel> list = carouselMapper.selectByExample(example);
+            if (list.size() > 0) {
+                throw new CustomerException("同名的分类已存在");
+            }
+            carouselMapper.insert(carousel);
+        }
 		
 	}
 
